@@ -2,8 +2,8 @@ module Components
   class RotationComponent
     attr_reader :angle
 
-    def initialize
-      @angle = 0
+    def initialize(angle)
+      @angle = set_angle(angle)
     end
 
     def set_angle(value)

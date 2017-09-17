@@ -19,18 +19,9 @@ class Asteroids < Gosu::Window
     @world.add_system(Systems::ScreenWrapSystem.new)
     @world.add_system(Systems::SpriteRenderSystem.new)
 
-    player = @world.create_entity
-    player.add_component(PlayerInputComponent.new(0.2, 10, 5, 0.95))
-    player.add_component(TransformComponent.new(100, 100))
-    player.add_component(VelocityComponent.new(0, 0))
-    player.add_component(AccelerationComponent.new(0, 0))
-    
-    rotation = RotationComponent.new
-    rotation.set_angle(0)
-    player.add_component(rotation)
-    
-    player.add_component(SpriteComponent.new(Gosu::Image.new("assets/ship.png")))
-    
+    create_player_entity
+
+    create_asteroid_entity
   end
 
   def update
@@ -43,6 +34,29 @@ class Asteroids < Gosu::Window
 
   def draw
     @world.draw
+  end
+
+  private
+
+  def create_player_entity
+    player = @world.create_entity
+    player.add_component(PlayerInputComponent.new(0.2, 10, 5, 0.95))
+    player.add_component(TransformComponent.new(100, 100))
+    player.add_component(VelocityComponent.new(0, 0))
+    player.add_component(AccelerationComponent.new(0, 0))
+    player.add_component(RotationComponent.new(0))
+    player.add_component(SpriteComponent.new(
+                           Gosu::Image.new("assets/ship.png"),
+                           0.5, 0.5,
+                           0.5, 0.5)
+                        )
+  end
+
+  def create_asteroid_entity
+    asteroid = @world.create_entity
+    asteroid.add_component(TransformComponent.new(100, 100))
+    asteroid.add_component(RotationComponent.new(0))
+    asteroid.add_component(SpriteComponent.new(Gosu::Image.new("assets/asteroid.png")))
   end
 end
 

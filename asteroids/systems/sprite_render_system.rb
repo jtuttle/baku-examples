@@ -9,8 +9,8 @@ module Systems
     def process_entity(entity, sprite, transform, rotation)
       sprite.texture.draw_rot(transform.x, transform.y, 0,
                               rotation.angle,
-                              0.5, 0.5, # center
-                              0.5, 0.5) # scale
+                              sprite.center_x, sprite.center_y,
+                              sprite.scale_x, sprite.scale_y)
     end
   end
 end
