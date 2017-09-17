@@ -1,10 +1,11 @@
 module Components
   class VelocityComponent
-    attr_accessor :x, :y
+    attr_accessor :x, :y, :rotational
 
-    def initialize(x, y)
+    def initialize(x, y, rotational)
       @x = x
       @y = y
+      @rotational = rotational
     end
   end
 end

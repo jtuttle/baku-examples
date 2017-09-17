@@ -40,21 +40,27 @@ class Asteroids < Gosu::Window
 
   def create_player_entity
     player = @world.create_entity
-    player.add_component(PlayerInputComponent.new(0.2, 10, 5, 0.95))
+    player.add_component(
+      PlayerInputComponent.new(
+        acceleration_speed: 0.2,
+        max_velocity: 10,
+        rotation_speed: 5,
+        friction: 0.95
+      )
+    )
     player.add_component(
       TransformComponent.new(
         GameConfig::SCREEN_WIDTH / 2,
         GameConfig::SCREEN_HEIGHT / 2
       )
     )
-    player.add_component(VelocityComponent.new(0, 0))
-    player.add_component(AccelerationComponent.new(0, 0))
+    player.add_component(VelocityComponent.new(0, 0, 0))
     player.add_component(RotationComponent.new(-90))
     player.add_component(
       SpriteComponent.new(
         Gosu::Image.new("assets/ship.png"),
-        0.5, 0.5,
-        0.5, 0.5
+        center_x: 0.5, center_y: 0.5,
+        scale_x: 0.5, scale_y: 0.5
       )
     )
   end
