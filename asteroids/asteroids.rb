@@ -16,11 +16,11 @@ class Asteroids < Gosu::Window
     @world = Baku::World.new
     @world.add_system(Systems::InputSystem.new)
     @world.add_system(Systems::MovementSystem.new)
-    @world.add_system(Systems::LevelWrapSystem.new)
+    @world.add_system(Systems::ScreenWrapSystem.new)
     @world.add_system(Systems::SpriteRenderSystem.new)
 
     player = @world.create_entity
-    player.add_component(PlayerInputComponent.new(0.2, 10, 5))
+    player.add_component(PlayerInputComponent.new(0.2, 10, 5, 0.95))
     player.add_component(TransformComponent.new(100, 100))
     player.add_component(VelocityComponent.new(0, 0))
     player.add_component(AccelerationComponent.new(0, 0))
