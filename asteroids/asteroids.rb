@@ -59,7 +59,6 @@ class Asteroids < Gosu::Window
     player.add_component(
       SpriteComponent.new(
         Gosu::Image.new("assets/ship.png"),
-        center_x: 0.5, center_y: 0.5,
         scale_x: 0.5, scale_y: 0.5
       )
     )
@@ -68,9 +67,19 @@ class Asteroids < Gosu::Window
   def create_asteroid_entity
     asteroid = @world.create_entity
     asteroid.add_component(TransformComponent.new(100, 100))
+    asteroid.add_component(
+      VelocityComponent.new(
+        rand(-2.0...2.0),
+        rand(-2.0...2.0),
+        rand(-1.0...1.0)
+      )
+    )
     asteroid.add_component(RotationComponent.new(0))
     asteroid.add_component(
-      SpriteComponent.new(Gosu::Image.new("assets/asteroid.png"))
+      SpriteComponent.new(
+        Gosu::Image.new("assets/asteroid.png"),
+        scale_x: 0.8, scale_y: 0.8
+      )
     )
   end
 end

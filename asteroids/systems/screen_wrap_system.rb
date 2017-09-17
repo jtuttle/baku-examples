@@ -3,7 +3,7 @@ module Systems
     def initialize
       super([TransformComponent], :update)
 
-      border = 30
+      border = 40
       
       @left = -border
       @right = GameConfig::SCREEN_WIDTH + border
