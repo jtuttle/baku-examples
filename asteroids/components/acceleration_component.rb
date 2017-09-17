@@ -1,9 +1,10 @@
 module Components
   class AccelerationComponent
-    attr_accessor :magnitude
+    attr_accessor :x, :y
 
-    def initialize(magnitude)
-      @magnitude = magnitude
+    def initialize(x, y)
+      @x = x
+      @y = y
     end
   end
 end

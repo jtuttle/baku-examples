@@ -10,7 +10,7 @@ module Systems
       sprite.texture.draw_rot(transform.x, transform.y, 0,
                               rotation.angle,
                               0.5, 0.5, # center
-                              2, 2)     # scale
+                              0.5, 0.5) # scale
     end
   end
 end
