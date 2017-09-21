@@ -7,7 +7,7 @@ module Systems
              RotationComponent,
              VelocityComponent], :update)
     end
-
+    
     def process_entity(entity, transform, rotation, velocity)
       transform.x += velocity.x
       transform.y += velocity.y
