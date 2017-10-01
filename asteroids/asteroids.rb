@@ -20,7 +20,9 @@ class Asteroids < Gosu::Window
     @world.add_system(Systems::MovementSystem.new)
     @world.add_system(Systems::ScreenWrapSystem.new)
     @world.add_system(Systems::TimedDestroySystem.new)
+
     @world.add_system(Systems::SpriteRenderSystem.new)
+    @world.add_system(Systems::ColliderRenderSystem.new)
 
     create_player_entity
 
@@ -72,6 +74,7 @@ class Asteroids < Gosu::Window
         laser_lifespan_ms: 500
       )
     )
+    player.add_component(ColliderComponent.new(25))
   end
 
   def create_asteroid_entity
@@ -91,6 +94,7 @@ class Asteroids < Gosu::Window
         scale_x: 0.8, scale_y: 0.8
       )
     )
+    asteroid.add_component(ColliderComponent.new(50))
   end
 end
 
