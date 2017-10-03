@@ -15,9 +15,12 @@ class Asteroids < Gosu::Window
 
     @prev_ms = 0
     
-    @world = create_world
+    init_world
+  end
 
-    EntityFactory.create_player(@world)
+  def init_world
+    @world = create_world
+    @player = EntityFactory.create_player(@world)
 
     create_starter_asteroid(100, 100)
     create_starter_asteroid(GameConfig::SCREEN_WIDTH - 100, 100)
@@ -31,6 +34,12 @@ class Asteroids < Gosu::Window
     delta_ms = current_ms - @prev_ms
     @prev_ms = current_ms
     @world.update(delta_ms)
+
+    # Restart the game if the player dies.
+    if @player.get_component(Components::PlayerStateComponent).dead
+      @world.dispose
+      init_world
+    end
   end
 
   def draw
@@ -50,10 +59,11 @@ class Asteroids < Gosu::Window
     world.add_system(Systems::TimedDestroySystem.new)
     world.add_system(Systems::CollisionSystem.new)
     world.add_system(Systems::AsteroidSplitSystem.new)
+    world.add_system(Systems::PlayerDeathSystem.new)
 
     # draw systems
     world.add_system(Systems::SpriteRenderSystem.new)
-    world.add_system(Systems::ColliderRenderSystem.new)
+    #world.add_system(Systems::ColliderRenderSystem.new)
 
     world
   end

@@ -27,12 +27,17 @@ class EntityFactory
       )
       player.add_component(
         LaserComponent.new(
-          laser_spawn_distance: 10,
-          laser_velocity: 10,
-          laser_lifespan_ms: 500
+          laser_spawn_distance: GameConfig::LASER_SPAWN_DISTANCE,
+          laser_velocity: GameConfig::LASER_VELOCITY,
+          laser_lifespan_ms: GameConfig::LASER_LIFESPAN_MS,
+          laser_cooldown_ms: GameConfig::LASER_COOLDOWN_MS
         )
       )
       player.add_component(ColliderComponent.new(25))
+
+      player.add_component(PlayerStateComponent.new)
+
+      player
     end
     
     def create_asteroid(world, size, x, y)
@@ -52,7 +57,7 @@ class EntityFactory
       scale =
         case size
         when 1
-          0.2
+          0.3
         when 2
           0.5
         when 3
@@ -69,7 +74,7 @@ class EntityFactory
       radius =
         case size
         when 1
-          12.5
+          18.75
         when 2
           31.25
         when 3
@@ -77,27 +82,31 @@ class EntityFactory
         end
       
       asteroid.add_component(ColliderComponent.new(radius))
+
+      asteroid
     end
 
-    def create_laser(world, transform, rotation, laser)
+    def create_laser(world, transform, rotation, laser_config)
       angle_radians = rotation.angle * (Math::PI / 180)
       
-      entity = world.create_entity([:laser])
+      laser = world.create_entity([:laser])
 
-      spawn_x = transform.x + Math.cos(angle_radians) * laser.laser_spawn_distance
-      spawn_y = transform.y + Math.sin(angle_radians) * laser.laser_spawn_distance
+      spawn_x = transform.x + Math.cos(angle_radians) * laser_config.laser_spawn_distance
+      spawn_y = transform.y + Math.sin(angle_radians) * laser_config.laser_spawn_distance
       
-      entity.add_component(TransformComponent.new(spawn_x, spawn_y, 5))
-      entity.add_component(RotationComponent.new(rotation.angle))
+      laser.add_component(TransformComponent.new(spawn_x, spawn_y, 5))
+      laser.add_component(RotationComponent.new(rotation.angle))
 
-      v_x = Math.cos(angle_radians) * laser.laser_velocity
-      v_y = Math.sin(angle_radians) * laser.laser_velocity
-      entity.add_component(VelocityComponent.new(v_x, v_y, 0))
+      v_x = Math.cos(angle_radians) * laser_config.laser_velocity
+      v_y = Math.sin(angle_radians) * laser_config.laser_velocity
+      laser.add_component(VelocityComponent.new(v_x, v_y, 0))
       
-      entity.add_component(SpriteComponent.new(Gosu::Image.new("assets/laser.png")))
-      entity.add_component(TimedDestroyComponent.new(laser.laser_lifespan_ms))
+      laser.add_component(SpriteComponent.new(Gosu::Image.new("assets/laser.png")))
+      laser.add_component(TimedDestroyComponent.new(laser_config.laser_lifespan_ms))
 
-      entity.add_component(ColliderComponent.new(10))
+      laser.add_component(ColliderComponent.new(10))
+
+      laser
     end
   end
 end
