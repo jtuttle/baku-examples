@@ -1,7 +1,7 @@
 include Components
 
 module Systems
-  class AsteroidSplitSystem < Baku::System
+  class AsteroidSplitSystem < Baku::ComponentSystem
     def initialize
       super([AsteroidComponent,
              ColliderComponent,

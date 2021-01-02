@@ -1,10 +1,10 @@
 module Systems
-  class ScreenWrapSystem < Baku::System
+  class ScreenWrapSystem < Baku::ComponentSystem
     def initialize
       super([TransformComponent], :update)
 
       border = 40
-      
+
       @left = -border
       @right = GameConfig::SCREEN_WIDTH + border
       @top = -border

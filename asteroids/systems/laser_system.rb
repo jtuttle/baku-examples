@@ -1,7 +1,7 @@
 include Components
 
 module Systems
-  class LaserSystem < Baku::System
+  class LaserSystem < Baku::ComponentSystem
     def initialize
       super([LaserComponent,
              TransformComponent,

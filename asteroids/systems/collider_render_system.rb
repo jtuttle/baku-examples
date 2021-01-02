@@ -1,7 +1,7 @@
 include Components
 
 module Systems
-  class ColliderRenderSystem < Baku::System
+  class ColliderRenderSystem < Baku::ComponentSystem
     def initialize(step = 10, color = 0xff00ff00)
       super([ColliderComponent, TransformComponent], :draw)
 

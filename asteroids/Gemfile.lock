@@ -1,10 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    baku (0.2.4)
+    baku (1.0.0)
+      miru (~> 0.1.0)
     coderay (1.1.2)
     gosu (0.12.1)
     method_source (0.8.2)
+    miru (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -17,10 +19,10 @@ PLATFORMS
   x86_64-darwin-16
 
 DEPENDENCIES
-  baku (~> 0.2.4)
+  baku (~> 1.0.0)
   gosu
   pry (~> 0.10.4)
   require_all (~> 1.4.0)
 
 BUNDLED WITH
-   1.15.4
+   2.0.2

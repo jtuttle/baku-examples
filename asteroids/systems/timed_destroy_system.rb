@@ -1,5 +1,5 @@
 module Systems
-  class TimedDestroySystem < Baku::System
+  class TimedDestroySystem < Baku::ComponentSystem
     def initialize
       super([TimedDestroyComponent], :update)
     end

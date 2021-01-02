@@ -1,5 +1,5 @@
 module Systems
-  class PlayerDeathSystem < Baku::System
+  class PlayerDeathSystem < Baku::ComponentSystem
     def initialize
       super([PlayerStateComponent, ColliderComponent],
             :update)
